@@ -1,7 +1,7 @@
 #!/bin/bash
 
 container_count=0
-for x in $(docker ps -a --format '{{.ID}}:{{.Status}}'|grep Exited|awk -F":" '{print $1}'); 
+for x in $(docker ps -a --format '{{.ID}}:{{.Status}}'|grep -e "Exited\|Created"|awk -F":" '{print $1}'); 
 do 
   docker rm $x; 
   container_count=$((container_count + 1))
